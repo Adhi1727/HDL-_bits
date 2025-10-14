@@ -1,0 +1,54 @@
+ module top_module(
+    input clk,
+    input in,
+    input reset,
+    output out); 
+    
+    parameter A = 0;
+    parameter B = 1;
+    parameter C = 2;
+    parameter D = 3;
+    
+    reg [2:0] state,next_state;
+    
+    always @(*) begin
+        case(state)
+            A:begin
+                    if(in)
+                        next_state=B;
+                    else
+                        next_state=A;
+                end
+            B:begin
+                    if(in)
+                        next_state=B;
+                    else
+                        next_state=C;
+                end
+            C:begin
+                    if(in)
+                        next_state=D;
+                    else
+                        next_state=A;
+                end
+            D:begin
+                    if(in)
+                        next_state=B;
+                    else
+                        next_state=C;
+                end
+            default:next_state=A;
+        endcase
+    end
+
+        always @(posedge clk)
+        begin
+            if(reset)
+                state<=A;
+            else
+                state<=next_state;
+        end   
+    
+    assign out = (state==D)?1:0;
+
+endmodule
