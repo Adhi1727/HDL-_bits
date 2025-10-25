@@ -4,7 +4,7 @@ module top_module (
     input x,
     output z
 );
-      parameter S0 = 0;
+    parameter S0 = 0;
     parameter S1 = 1;
     parameter S2 = 2;
     parameter S3 = 3;
@@ -12,16 +12,14 @@ module top_module (
     
     reg [2:0] state, next_state;
     
-    always @(posedge clk)
-        begin
+    always @(posedge clk) begin
             if(reset) 
                 state <= S0;
             else
                 state <= next_state;
         end
     
-    always @(x or state)
-        begin
+    always @(*) begin
             case(state)
                 S0: next_state <= (x==1)? S1: S0;
                 S1: next_state <= (x==1)? S4: S1;
