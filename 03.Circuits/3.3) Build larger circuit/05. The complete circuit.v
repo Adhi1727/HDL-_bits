@@ -8,7 +8,7 @@ module top_module (
     output done,
     input ack );
     
-     parameter S0=0;
+    parameter S0=0;
     parameter S1=1;
     parameter S2=2;
     parameter S3=3;
